@@ -5,7 +5,7 @@ import java.beans.PropertyChangeListener;
 import java.util.Random;
 
 /**
- * Created by Kieran on 13/02/2017.
+ * Created by Kieran on 01/02/2017.
  */
 public class SorterGui extends JFrame {
     private JPanel enterPanel, resultPanel;
@@ -82,6 +82,7 @@ public class SorterGui extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 Sorters.enhancedBubbleSort(numbers);
                 resetTime();
+                swapReset();
                 sort();
                 ascBubbleLabel.setText("Time(ns): " + bubbleTime + " swaps: " + bubblecomparrison + "  " + bubbleSwap);
                 ascEnhancedLabel.setText("Time(ns): " + enhancedTime + " swaps: " + enhancedComparrison + "  " + enhancedSwap);
@@ -95,6 +96,7 @@ public class SorterGui extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 Sorters.enhancedBubbleSortBackwards(numbers);
                 resetTime();
+                swapReset();
                 sort();
                 descBubbleLabel.setText("Time(ns): " + bubbleTime + " swaps: " + bubblecomparrison + "  " + bubbleSwap);
                 descEnhancedLabel.setText("Time(ns): " + enhancedTime + " swaps: " + enhancedComparrison + "  " + enhancedSwap);
