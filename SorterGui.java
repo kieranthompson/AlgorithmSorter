@@ -13,7 +13,7 @@ public class SorterGui extends JFrame {
             descInsertionLabel, descSelectionLabel, randBubbleLabel, randEnhancedLabel, randInsertionLabel, randSelectionLabel;
 
     private JButton getArrayButton, ascButton, descButton, randButton;
-    private Integer[]arraySizes = {1000, 10000, 100000};
+    private Integer[]arraySizes = {10, 1000, 10000, 100000};
     private JComboBox<Integer> options = new JComboBox<Integer>(arraySizes);
 
     private long[] numbers;
@@ -83,11 +83,12 @@ public class SorterGui extends JFrame {
                 Sorters.enhancedBubbleSort(numbers);
                 resetTime();
                 swapReset();
-                sort();
+                sortAsc();
                 ascBubbleLabel.setText("Time(ns): " + bubbleTime + " swaps: " + bubblecomparrison + "  " + bubbleSwap);
                 ascEnhancedLabel.setText("Time(ns): " + enhancedTime + " swaps: " + enhancedComparrison + "  " + enhancedSwap);
                 ascSelectionLabel.setText("Time(ns): " + selectionTime + " swaps: " + selectionComparrison + "  " + selectionSwap);
                 ascInsertionLabel.setText("Time(ns): " + insertionTime + " swaps: " + insertionComparrison + "  " + insertionSwap);
+                printArray();
             }
         });
 
@@ -97,11 +98,12 @@ public class SorterGui extends JFrame {
                 Sorters.enhancedBubbleSortBackwards(numbers);
                 resetTime();
                 swapReset();
-                sort();
+                sortDesc();
                 descBubbleLabel.setText("Time(ns): " + bubbleTime + " swaps: " + bubblecomparrison + "  " + bubbleSwap);
                 descEnhancedLabel.setText("Time(ns): " + enhancedTime + " swaps: " + enhancedComparrison + "  " + enhancedSwap);
                 descSelectionLabel.setText("Time(ns): " + selectionTime + " swaps: " + selectionComparrison + "  " + selectionSwap);
                 descInsertionLabel.setText("Time(ns): " + insertionTime + " swaps: " + insertionComparrison + "  " + insertionSwap);
+                printArray();
             }
         });
 
@@ -110,16 +112,103 @@ public class SorterGui extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 resetArray();
                 resetTime();
-                sort();
+                randSort();
                 randBubbleLabel.setText("Time(ns): " + bubbleTime + " swaps: " + bubblecomparrison + "  " + bubbleSwap);
                 randEnhancedLabel.setText("Time(ns): " + enhancedTime + " swaps: " + enhancedComparrison + "  " + enhancedSwap);
                 randSelectionLabel.setText("Time(ns): " + selectionTime + " swaps: " + selectionComparrison + "  " + selectionSwap);
                 randInsertionLabel.setText("Time(ns): " + insertionTime + " swaps: " + insertionComparrison + "  " + insertionSwap);
+                printArray();
             }
         });
     }
 
-    public void sort(){
+    public void sortAsc(){
+        StopWatch stopwatch = new StopWatch();
+        stopwatch.start();
+        Sorters.bubbleSort(numbers);
+        stopwatch.stop();
+        bubblecomparrison = Sorters.swap;
+        bubbleSwap = Sorters.swap2;
+        bubbleTime = stopwatch.getTimeElapsed();
+        stopwatch.reset();
+        swapReset();
+        resetArrayAsc();
+
+        stopwatch.start();
+        Sorters.enhancedBubbleSort(numbers);
+        stopwatch.stop();
+        enhancedComparrison = Sorters.swap;
+        enhancedSwap = Sorters.swap2;
+        enhancedTime = stopwatch.getTimeElapsed();
+        stopwatch.reset();
+        swapReset();
+        resetArrayAsc();
+
+        stopwatch.start();
+        Sorters.selectionSort(numbers);
+        stopwatch.stop();
+        selectionComparrison = Sorters.swap;
+        selectionSwap = Sorters.swap2;
+        selectionTime = stopwatch.getTimeElapsed();
+        stopwatch.reset();
+        swapReset();
+        resetArrayAsc();
+
+        stopwatch.start();
+        Sorters.insertionSort(numbers);
+        stopwatch.stop();
+        insertionComparrison = Sorters.swap;
+        insertionSwap = Sorters.swap2;
+        insertionTime = stopwatch.getTimeElapsed();
+        stopwatch.reset();
+        swapReset();
+        resetArrayAsc();
+    }
+
+    public void sortDesc(){
+        StopWatch stopwatch = new StopWatch();
+        stopwatch.start();
+        Sorters.bubbleSort(numbers);
+        stopwatch.stop();
+        bubblecomparrison = Sorters.swap;
+        bubbleSwap = Sorters.swap2;
+        bubbleTime = stopwatch.getTimeElapsed();
+        stopwatch.reset();
+        swapReset();
+        resetArrayDesc();
+
+        stopwatch.start();
+        Sorters.enhancedBubbleSort(numbers);
+        stopwatch.stop();
+        enhancedComparrison = Sorters.swap;
+        enhancedSwap = Sorters.swap2;
+        enhancedTime = stopwatch.getTimeElapsed();
+        stopwatch.reset();
+        swapReset();
+        resetArrayDesc();
+
+        stopwatch.start();
+        Sorters.selectionSort(numbers);
+        stopwatch.stop();
+        selectionComparrison = Sorters.swap;
+        selectionSwap = Sorters.swap2;
+        selectionTime = stopwatch.getTimeElapsed();
+        stopwatch.reset();
+        swapReset();
+
+        resetArray();
+        stopwatch.start();
+        Sorters.insertionSort(numbers);
+        stopwatch.stop();
+        insertionComparrison = Sorters.swap;
+        insertionSwap = Sorters.swap2;
+        insertionTime = stopwatch.getTimeElapsed();
+        stopwatch.reset();
+        swapReset();
+        resetArrayDesc();
+    }
+
+    public void randSort(){
         StopWatch stopwatch = new StopWatch();
         stopwatch.start();
         Sorters.bubbleSort(numbers);
@@ -149,8 +238,8 @@ public class SorterGui extends JFrame {
         selectionTime = stopwatch.getTimeElapsed();
         stopwatch.reset();
         swapReset();
-        resetArray();
 
+        resetArray();
         stopwatch.start();
         Sorters.insertionSort(numbers);
         stopwatch.stop();
@@ -175,8 +264,18 @@ public class SorterGui extends JFrame {
         Sorters.swap2 = 0;
     }
 
+    public void resetArrayAsc(){
+        resetArray();
+        Sorters.enhancedBubbleSort(numbers);
+    }
+
+    public void resetArrayDesc(){
+        resetArray();
+        Sorters.enhancedBubbleSortBackwards(numbers);
+    }
+
     public void resetArray(){
-        for(int i = 0; i < numbers.length; i++){
+        for(int i = 0; i  < numbers.length; i++){
             numbers[i] = temp[i];
         }
     }
@@ -188,6 +287,11 @@ public class SorterGui extends JFrame {
         insertionTime = 0;
     }
 
+    public void printArray(){
+        for(int i = 0; i < numbers.length; i++){
+            System.out.print(numbers[i] + ", ");
+        }
+    }
     public static void main(String [] args){
 
         SorterGui frame = new SorterGui();

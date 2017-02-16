@@ -6,9 +6,8 @@ public class Sorters {
 		
 		for(int i = 0; i < numbers.length-1; i++) {
 			long temp;
-			swap++;
 			for(int j = 0; j < numbers.length-1; j++){
-				
+				swap++;
 				if(numbers[j] > numbers[j+1]){
 					temp = numbers[j];
 					numbers[j] = numbers[j+1];
@@ -23,13 +22,11 @@ public class Sorters {
 	
 	public static long[] enhancedBubbleSort(long[] numbers) {
 		boolean check = false;
-		
 		for(int i = 0; i < numbers.length-1; i++) {
 			check = false;
-			swap++;
 			long temp;
 			for(int j = 0; j < numbers.length-1-i; j++){
-				
+				swap++;
 				if(numbers[j] > numbers[j+1]){
 					temp = numbers[j];
 					numbers[j] = numbers[j+1];
@@ -51,12 +48,13 @@ public class Sorters {
 		long temp;  
 	     for (i = numbers.length-1; i > 0; i--){
 	          first = 0;
-	          swap++;
+
 	          for(j = 1; j <= i; j++) {
+				   swap++;
 	               if( numbers[j] > numbers[first])         
 	                 first = j;
-	               	 swap2++;
 	          }
+			  swap2++;
 	          temp = numbers[first];
 	          numbers[first] = numbers[i];
 	          numbers[i] = temp; 
@@ -67,15 +65,14 @@ public class Sorters {
 	public static long[] insertionSort(long[] numbers) {
 		
 		for(int i = 1; i < numbers.length; i++){
-			swap++;
 			long next = numbers[i];
-			
 			int j = i;
 			while(j > 0 && numbers[j-1] > next){
-				swap2++;
+				swap++;
 				numbers[j] = numbers[j-1];
 				j--;
 			}
+			swap2++;
 			numbers[j] = next;
 		}
 		return numbers;
@@ -152,6 +149,11 @@ public class Sorters {
 			numbers[j] = next;
 		}
 		return numbers;
+	}
+
+	public static void resetSwaps(){
+		swap = 0;
+		swap2 = 0;
 	}
 
 }
